@@ -1,0 +1,18 @@
+# Entornos virtuales
+venv/
+env/
+ENV/
+
+# Archivos de caché de Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Base de datos local de desarrollo
+*.sqlite3
+
+# Variables de entorno y configuraciones privadas
+.env
+
+# Archivos de medios subidos por usuarios (opcional, por si luego suben fotos de productos)
+media/
