@@ -1,0 +1,23 @@
+*cuando quieras cargar el repositorio en una compu nueva mete al cmd apretando WINDOWS+R y escribis CMD y ahí dentro pones estos comandos y hacelos en este orden exacto
+
+git clone https://github.com/charlypitodulce52-crypto/tiendademusica.git
+
+cd tiendademusica
+
+python -m venv venv
+
+venv\scripts\actívate
+
+pip install django
+
+python manage.py migrate
+
+code .
+
+*después cuando hagas esto y programes y quieras subir tus cosas al GitHub pones estos comandos en el cmd de antes ponelos en este orden
+
+git add .
+
+git commit -m "Un mensaje corto explicando qué cambiaste"
+
+git push
