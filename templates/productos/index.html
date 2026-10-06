@@ -5,20 +5,67 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tienda de Música</title>
     <style>
+        /* Estilos generales de la página */
         body {
             font-family: Arial, sans-serif;
             background-color: #121212;
             color: #ffffff;
+            margin: 0;
+            padding: 20px;
             text-align: center;
-            padding-top: 50px;
         }
+
+        /* Título principal */
         h1 {
             color: #1db954;
+            margin-bottom: 10px;
+        }
+
+        p {
+            color: #b3b3b3;
+        }
+
+        /* Contenedor de cada producto (Tarjeta) */
+        .producto-card {
+            background-color: #1e1e1e;
+            margin: 20px auto;
+            padding: 20px;
+            width: 60%;
+            max-width: 500px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            text-align: left;
+            border-left: 5px solid #1db954;
+        }
+
+        .producto-card h3 {
+            margin-top: 0;
+            color: #ffffff;
+        }
+
+        .precio {
+            color: #1db954;
+            font-size: 1.2em;
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
-    <h1>🎸 ¡Bienvenidos a nuestra Tienda de Música! 🎶</h1>
-    <p>Pronto encontrarás las mejores guitarras, pedales y amplificadores aquí.</p>
+    <h1>🎸 ¡Bienvenido a nuestra Tienda de Música! 🎶</h1>
+    <p>Estos son los productos disponibles en stock:</p>
+
+    <!-- Bucle de Django para recorrer los productos de la base de datos -->
+    {% if productos %}
+        {% for p in productos %}
+            <div class="producto-card">
+                <h3>{{ p.nombre }}</h3>
+                <p>{{ p.descripcion }}</p>
+                <p class="precio">Precio: ${{ p.precio }}</p>
+                <p><strong>Stock disponible:</strong> {{ p.stock }} unidades</p>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>No hay productos cargados todavía.</p>
+    {% endif %}
 </body>
 </html>
