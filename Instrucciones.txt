@@ -6,7 +6,7 @@ cd tiendademusica
 
 python -m venv venv
 
-venv\scripts\actívate
+venv\scripts\activate
 
 pip install django
 
