@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block titulo %}Sinfonía Virtual{% endblock %}</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f8;
+            color: #333333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* HEADER */
+        header {
+            background-color: #12161f;
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #ffffff;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-circle {
+            background-color: #1a2233;
+            border: 2px solid #3b82f6;
+            color: #3b82f6;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+
+        .logo-text {
+            font-weight: bold;
+            font-size: 16px;
+            letter-spacing: 1px;
+            line-height: 1.1;
+        }
+
+        .logo-text span {
+            font-size: 11px;
+            color: #a0aec0;
+            letter-spacing: 2px;
+        }
+
+        nav {
+            display: flex;
+            gap: 25px;
+        }
+
+        nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+
+        nav a:hover, nav a.active {
+            color: #3b82f6;
+        }
+
+        .header-icons {
+            display: flex;
+            gap: 20px;
+            font-size: 14px;
+            color: #cbd5e1;
+            align-items: center;
+        }
+
+        .header-icons a {
+            color: #cbd5e1;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .header-icons a:hover {
+            color: #3b82f6;
+        }
+
+        /* CONTENIDO PRINCIPAL */
+        main {
+            flex: 1;
+            padding: 30px 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        /* FOOTER */
+        footer {
+            background-color: #12161f;
+            color: #cbd5e1;
+            padding: 40px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            font-size: 14px;
+            margin-top: auto;
+        }
+
+        footer h4 {
+            color: #ffffff;
+            margin-bottom: 15px;
+            font-size: 15px;
+        }
+
+        footer ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        footer ul li {
+            margin-bottom: 8px;
+        }
+
+        footer ul li a {
+            color: #94a3b8;
+            text-decoration: none;
+        }
+
+        footer ul li a:hover {
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <div class="logo-area">
+            <div class="logo-circle">🎵</div>
+            <div class="logo-text">
+                SINFONÍA<br><span>VIRTUAL</span>
+            </div>
+        </div>
+
+        <nav>
+            <a href="{% url 'inicio' %}" class="active">HOME</a>
+            <a href="{% url 'productos' %}">PRODUCTOS</a>
+            <a href="{% url 'ofertas' %}">OFERTAS</a>
+            <a href="/admin/">ADMIN</a>
+        </nav>
+
+        <div class="header-icons">
+            <a href="/admin/">👤 Cuenta</a>
+            <a href="#">❤️ Favoritos</a>
+            <a href="#">🛒 Carrito (3)</a>
+        </div>
+    </header>
+
+    <!-- CONTENIDO DINÁMICO -->
+    <main>
+        {% block contenido %}
+        {% endblock %}
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <div>
+            <h4>ENLACES RÁPIDOS</h4>
+            <ul>
+                <li><a href="#">Ayuda</a></li>
+                <li><a href="#">Envíos</a></li>
+                <li><a href="#">Devoluciones</a></li>
+            </ul>
+        </div>
+        <div>
+            <h4>CONTACTO</h4>
+            <p>✉️ Soporte@sinfonia.com</p>
+            <p>📞 +54 351 1234567</p>
+        </div>
+        <div>
+            <h4>REDES SOCIALES</h4>
+            <p>🌐 Instagram / Facebook / YouTube</p>
+        </div>
+        <div>
+            <h4>NEWSLETTER</h4>
+            <p style="color: #94a3b8; font-size: 13px;">Recibe ofertas exclusivas en tu correo.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

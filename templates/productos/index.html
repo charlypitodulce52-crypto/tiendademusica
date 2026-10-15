@@ -1,71 +1,211 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tienda de Música</title>
+{% extends 'productos/base.html' %}
+
+{% block titulo %}Home - Sinfonía Virtual{% endblock %}
+
+{% block contenido %}
     <style>
-        /* Estilos generales de la página */
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #121212;
+        /* BANNER PRINCIPAL */
+        .hero-banner {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=1200&q=80') center/cover;
+            border-radius: 12px;
+            height: 350px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-end;
+            text-align: right;
+            padding: 40px;
             color: #ffffff;
-            margin: 0;
-            padding: 20px;
+            margin-bottom: 40px;
+        }
+
+        .hero-banner h1 {
+            font-size: 32px;
+            margin: 0 0 10px 0;
+            color: #ffffff;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .hero-banner p {
+            color: #e2e8f0;
+            font-size: 15px;
+            margin-bottom: 20px;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+        }
+
+        .btn-comprar {
+            background-color: #2563eb;
+            color: white;
+            padding: 10px 24px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 14px;
+            transition: background 0.2s;
+        }
+
+        .btn-comprar:hover {
+            background-color: #1d4ed8;
+        }
+
+        /* SECCIÓN DE TÍTULOS */
+        .section-title {
             text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            margin: 30px 0 20px 0;
+            letter-spacing: 1px;
+            color: #1e293b;
         }
 
-        /* Título principal */
-        h1 {
-            color: #1db954;
-            margin-bottom: 10px;
+        /* CATEGORÍAS */
+        .categorias-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 15px;
+            margin-bottom: 40px;
         }
 
-        p {
-            color: #b3b3b3;
-        }
-
-        /* Contenedor de cada producto (Tarjeta) */
-        .producto-card {
-            background-color: #1e1e1e;
-            margin: 20px auto;
-            padding: 20px;
-            width: 60%;
-            max-width: 500px;
+        .categoria-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
             border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            padding: 15px 10px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        }
+
+        .categoria-card h5 {
+            margin: 10px 0 5px 0;
+            font-size: 13px;
+            color: #1e293b;
+        }
+
+        .categoria-card span {
+            font-size: 11px;
+            color: #3b82f6;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /* PRODUCTOS DESTACADOS (Desde tu Base de Datos) */
+        .productos-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .producto-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 20px;
             text-align: left;
-            border-left: 5px solid #1db954;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.04);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
 
         .producto-card h3 {
-            margin-top: 0;
-            color: #ffffff;
+            font-size: 16px;
+            margin: 0 0 10px 0;
+            color: #1e293b;
+        }
+
+        .producto-card p {
+            font-size: 13px;
+            color: #64748b;
+            margin: 0 0 15px 0;
+        }
+
+        .precio-stock {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
         }
 
         .precio {
-            color: #1db954;
-            font-size: 1.2em;
+            font-size: 18px;
+            font-weight: bold;
+            color: #0f172a;
+        }
+
+        .stock {
+            font-size: 12px;
+            color: #059669;
+            background: #d1fae5;
+            padding: 3px 8px;
+            border-radius: 4px;
             font-weight: bold;
         }
-    </style>
-</head>
-<body>
-    <h1>🎸 ¡Bienvenido a nuestra Tienda de Música! 🎶</h1>
-    <p>Estos son los productos disponibles en stock:</p>
 
-    <!-- Bucle de Django para recorrer los productos de la base de datos -->
-    {% if productos %}
-        {% for p in productos %}
-            <div class="producto-card">
-                <h3>{{ p.nombre }}</h3>
-                <p>{{ p.descripcion }}</p>
-                <p class="precio">Precio: ${{ p.precio }}</p>
-                <p><strong>Stock disponible:</strong> {{ p.stock }} unidades</p>
-            </div>
-        {% endfor %}
-    {% else %}
-        <p>No hay productos cargados todavía.</p>
-    {% endif %}
-</body>
-</html>
+        .btn-carrito {
+            background-color: #2563eb;
+            color: white;
+            border: none;
+            padding: 10px;
+            width: 100%;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            text-align: center;
+            font-size: 13px;
+        }
+
+        .btn-carrito:hover {
+            background-color: #1d4ed8;
+        }
+
+        .sin-productos {
+            text-align: center;
+            grid-column: span 4;
+            color: #64748b;
+            padding: 30px;
+        }
+    </style>
+
+    <!-- BANNER HERO -->
+    <div class="hero-banner">
+        <h1>¡DESPIERTA TU MÚSICA!</h1>
+        <p>Explora la mejor selección de instrumentos y equipos profesionales.</p>
+        <a href="#" class="btn-comprar">COMPRAR AHORA</a>
+    </div>
+
+    <!-- CATEGORÍAS -->
+    <div class="section-title">CATEGORÍAS DE PRODUCTOS</div>
+    <div class="categorias-grid" style="grid-template-columns: repeat(5, 1fr);">
+        <div class="categoria-card">🎸<h5>GUITARRAS</h5><span>VER MÁS</span></div>
+        <div class="categoria-card">🎸<h5>BAJOS</h5><span>VER MÁS</span></div>
+        <div class="categoria-card">🥁<h5>BATERÍAS</h5><span>VER MÁS</span></div>
+        <div class="categoria-card">🎹<h5>TECLADOS</h5><span>VER MÁS</span></div>
+        <div class="categoria-card">🔊<h5>PARLANTES</h5><span>VER MÁS</span></div>
+    </div>
+
+    <!-- PRODUCTOS DE LA SEMANA (Dinámicos desde la BD) -->
+    <div class="section-title">DESTACADOS DE LA SEMANA</div>
+    
+    <div class="productos-grid">
+        {% if productos %}
+            {% for p in productos %}
+                <div class="producto-card">
+                    <div>
+                        <h3>{{ p.nombre }}</h3>
+                        <p>{{ p.descripcion }}</p>
+                    </div>
+                    <div>
+                        <div class="precio-stock">
+                            <span class="precio">${{ p.precio }}</span>
+                            <span class="stock">{{ p.stock }} disp.</span>
+                        </div>
+                        <button class="btn-carrito">AGREGAR AL CARRITO</button>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p class="sin-productos">No hay productos cargados todavía en la base de datos.</p>
+        {% endif %}
+    </div>
+{% endblock %}
